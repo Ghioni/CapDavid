@@ -19,29 +19,40 @@
         </f:toolbar>
         <f:content>
             <Label text="Order ID" />
-            <Input value="{oForm>/Id}" editable="false"/>
+            <Input value="{editForm>/Id}" editable="false"/>
 
             <Label text="Order Date" />
-            <Input value="{oForm>/orderDate}" editable="false"/>
+            <Input value="{editForm>/orderDate}" editable="false"/>
 
             <Label text="Shipping Date" />
-            <Input value="{oForm>/shippingDate}" />
+            <DatePicker
+                    id="DP2"
+                    placeholder="Enter Date"
+                    change="handleChange"
+                    class="sapUiSmallMarginBottom"
+                    value="{
+                        'path': 'editForm>/shippingDate',
+                        'type': 'sap.ui.model.type.DateTime',
+                        'formatOptions': {
+                            'pattern': 'dd/MM/y'
+                        }
+                    }"/>
 
             <Label text="Product name" />
-            <Input value="{oForm>/product}"/>
+            <Input value="{editForm>/product}"/>
 
             <Label text="Price" />
-            <Input value="{oForm>/price}"/>
+            <Input value="{editForm>/price}"/>
 
 
             <Label text="Client id" />
-            <Input value="{oForm>/client_id}" editable="false"/>
+            <Input value="{editForm>/client_id}" editable="false"/>
 
             <Label text="Client email" />
-            <Input value="{oForm>/client_email}" editable="false"/>
+            <Input value="{editForm>/client_email}" editable="false"/>
 
             <Button text="Edit" press="onPressEdit"/>
-            <Button text="Close" press="onPressClose"/>
+            <Button text="Close" press="closeOnPressEdit"/>
         </f:content>
     </f:SimpleForm>
       

@@ -49,6 +49,7 @@ sap.ui.define([
                       oModel.remove(sPath, {
                         success: async () => {
                           MessageToast.show("Deletion was successful")
+                          // Refresh of the table
                           let oModel = new JSONModel({});
                           const aDataOrders = await this._getHanaData("/ordersTable");
                           oModel.setProperty("/ordersTable", aDataOrders)
@@ -79,22 +80,28 @@ sap.ui.define([
               onPressAdd: function(){
                 const modelloDati = this.getOwnerComponent().getModel();
                 const oNew = this.getView().getModel("orderFormModel").getData();
-
-                console.log(oNew.orderDate);
+                // Adjust timezone of date picker
+                const orderDate = oNew.orderDate;
+                const shippingDate = oNew.shippingDate;
+                orderDate.setHours(3);
+                shippingDate.setHours(3);
 
                 modelloDati.create("/ordersTable", {Id          : parseInt(oNew.Id),
-                                                    orderDate   : oNew.orderDate,
-                                                    shippingDate: oNew.shippingDate,
+                                                    orderDate   : orderDate,
+                                                    shippingDate: shippingDate,
                                                     product     : oNew.product,
                                                     price       : parseInt(oNew.price),
                                                     client_Id   :parseInt(oNew.client_Id),
                                                     client_email: oNew.client_email}, {
                   success: async (oNew, response) => {
                       MessageToast.show("New entry created")
+                      // Refresh of the table
                       let oModel = new JSONModel({});
                       const aDataOrders = await this._getHanaData("/ordersTable");
                       oModel.setProperty("/ordersTable", aDataOrders)
                       this.getView().setModel(oModel, "myModel");
+                      // Closing of the dialog
+                      this.byId("createDialog").close();
                   },
                   error: async (e) => {
                     console.log(e);
@@ -102,7 +109,45 @@ sap.ui.define([
                     MessageToast.show(msg);
                   },
                 })
-              }
+              },
+              onPressGetObject: function(oEvent){
+                const oLine = oEvent.getSource().getBindingContext("myModel").getObject();
+                this.getView().setModel(new JSONModel(oLine), "editForm");
+                
+                this.onPressEditDialog(oLine);
+              },
+              onPressEditDialog: function(){
+                if (!this.pDialog2) {
+                  this.pDialog2 = this.loadFragment({
+                    name: "apptest.view.fragments.orderUpdateForm",
+                  });
+                }
+                this.pDialog2.then(function (oDialog2) {
+                  oDialog2.open();
+                });
+
+              },
+              closeOnPressEdit: function () {
+                this.byId("editDialog").close();
+              },
+              onPressLine: function (oEvent) {
+                const self = this;
+                const oLine = oEvent.getSource().getBindingContext("myModel").getObject();
+                const oId = oLine.Id;
+                
+                MessageBox.warning("Do you want to navigate to order detail?", {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CLOSE],
+                    onClose: function (sAction) {
+                        if(sAction == 'OK'){
+                            self.getOwnerComponent().getRouter().navTo("OrderDetail",{
+                                Id: oId
+                            })
+                        }
+                        debugger;
+                    }
+                });
+                
+            }
               
         });
     });
