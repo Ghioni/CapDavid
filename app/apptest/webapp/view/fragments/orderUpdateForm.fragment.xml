@@ -1,0 +1,49 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+<Dialog
+      id="editDialog"
+      title="Insert"
+      >
+        <f:SimpleForm 
+        layout="ResponsiveGridLayout"
+        >
+        <f:toolbar>
+            <Toolbar >
+                <Title text="Update order"/>
+            </Toolbar>
+        </f:toolbar>
+        <f:content>
+            <Label text="Order ID" />
+            <Input value="{oForm>/Id}" editable="false"/>
+
+            <Label text="Order Date" />
+            <Input value="{oForm>/orderDate}" editable="false"/>
+
+            <Label text="Shipping Date" />
+            <Input value="{oForm>/shippingDate}" />
+
+            <Label text="Product name" />
+            <Input value="{oForm>/product}"/>
+
+            <Label text="Price" />
+            <Input value="{oForm>/price}"/>
+
+
+            <Label text="Client id" />
+            <Input value="{oForm>/client_id}" editable="false"/>
+
+            <Label text="Client email" />
+            <Input value="{oForm>/client_email}" editable="false"/>
+
+            <Button text="Edit" press="onPressEdit"/>
+            <Button text="Close" press="onPressClose"/>
+        </f:content>
+    </f:SimpleForm>
+      
+   </Dialog>
+</c:FragmentDefinition>

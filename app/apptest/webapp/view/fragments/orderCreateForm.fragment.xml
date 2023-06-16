@@ -1,0 +1,71 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+<Dialog
+      id="createDialog"
+      title="Insert"
+      >
+        <f:SimpleForm 
+        layout="ResponsiveGridLayout"
+        >
+        <f:toolbar>
+            <Toolbar >
+                <Title text="New order"/>
+            </Toolbar>
+        </f:toolbar>
+        <f:content>
+            <Label text="Order ID" />
+            <Input value="{orderFormModel>/Id}"/>
+
+            <Label text="Order Date" />
+            <DatePicker
+					id="DP1"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"
+                    value="{
+						'path': 'orderFormModel>/orderDate',
+						'type': 'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'dd/MM/y'
+						}
+					}"/>
+
+            <Label text="Shipping Date" />
+            <DatePicker
+					id="DP2"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"
+                    value="{
+						'path': 'orderFormModel>/shippingDate',
+						'type': 'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'dd/MM/y'
+						}
+					}"/>
+
+            <Label text="Product name" />
+            <Input value="{orderFormModel>/product}"/>
+
+            <Label text="Price" />
+            <Input value="{orderFormModel>/price}"/>
+
+
+            <Label text="Client id" />
+            <Input value="{orderFormModel>/client_Id}" />
+
+            <Label text="Client email" />
+            <Input value="{orderFormModel>/client_email}" />
+
+            <Button text="Add" press="onPressAdd"/>
+            <Button text="Close" press="closeOnPress"/>
+        </f:content>
+    </f:SimpleForm>
+      
+   </Dialog>
+</c:FragmentDefinition>
