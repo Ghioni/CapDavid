@@ -1,0 +1,54 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+<Dialog
+      id="createDialog"
+      title="Insert"
+      >
+        <f:SimpleForm 
+        layout="ResponsiveGridLayout"
+        >
+        <f:toolbar>
+            <Toolbar >
+                <Title text="New User"/>
+            </Toolbar>
+        </f:toolbar>
+        <f:content>
+            <Label text="Client ID" />
+            <Input value="{clientFormModel>/Id}" type="Number"/>
+
+            <Label text="Name" />
+            <Input value="{clientFormModel>/name}"/>
+
+            <Label text="Surname" />
+            <Input value="{clientFormModel>/surname}"/>
+
+            <Label text="Address" />
+            <Input value="{clientFormModel>/address}"/>
+
+            <Label text="Postal code" />
+            <Input value="{clientFormModel>/cad}" type="Number"/>
+
+            <Label text="City" />
+            <Input value="{clientFormModel>/city}" />
+
+            <Label text="Country" />
+            <Input value="{clientFormModel>/country}" />
+
+            <Label text="Email" />
+            <Input value="{clientFormModel>/email}" />
+
+            <Label text="Password" />
+            <Input value="{clientFormModel>/password}" />
+
+            <Button text="Add" press="onPressAdd"/>
+            <Button text="Close" press="closeOnPress"/>
+        </f:content>
+    </f:SimpleForm>
+      
+   </Dialog>
+</c:FragmentDefinition>

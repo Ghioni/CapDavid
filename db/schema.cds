@@ -8,12 +8,10 @@ entity client{
         address : String(50);
         cad     : Int16;
         city    : String(50);
-        Country : String(50);
-    key email   : String(50);
+        country : String(50);
+        email   : String(50);
         password: String(50);
         orders  : Association to many order on orders.client =$self;
-    
-    
 }
 
 entity order{

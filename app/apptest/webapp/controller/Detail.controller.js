@@ -12,7 +12,7 @@ sap.ui.define([
         "use strict";
 
         
-        return Controller.extend("apptest.controller.Home", {
+        return Controller.extend("apptest.controller.Detail", {
 
             getRouter: function () {
                 return UIComponent.getRouterFor(this);

@@ -24,7 +24,7 @@
       "[hybrid]": {
         "db": "hana-cloud"
       },
-      "db": "hana-cloud"
+      "db": "sql"
     }
   }
 }

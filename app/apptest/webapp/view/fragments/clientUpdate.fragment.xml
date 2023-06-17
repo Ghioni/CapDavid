@@ -1,0 +1,54 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+<Dialog
+      id="editDialog"
+      title="Insert"
+      >
+        <f:SimpleForm 
+        layout="ResponsiveGridLayout"
+        >
+        <f:toolbar>
+            <Toolbar >
+                <Title text="Edit User"/>
+            </Toolbar>
+        </f:toolbar>
+        <f:content>
+            <Label text="Client ID" />
+            <Input value="{editForm>/Id}" type="Number" editable="false"/>
+
+            <Label text="Name" />
+            <Input value="{editForm>/name}"/>
+
+            <Label text="Surname" />
+            <Input value="{editForm>/surname}"/>
+
+            <Label text="Address" />
+            <Input value="{editForm>/address}"/>
+
+            <Label text="Postal code" />
+            <Input value="{editForm>/cad}" type="Number"/>
+
+            <Label text="City" />
+            <Input value="{editForm>/city}" />
+
+            <Label text="Country" />
+            <Input value="{editForm>/country}" />
+
+            <Label text="Email" />
+            <Input value="{editForm>/email}" />
+
+            <Label text="Password" />
+            <Input value="{editForm>/password}" />
+
+            <Button text="Edit" press="onPressEdit"/>
+            <Button text="Close" press="closeOnPressEdit"/>
+        </f:content>
+    </f:SimpleForm>
+      
+   </Dialog>
+</c:FragmentDefinition>

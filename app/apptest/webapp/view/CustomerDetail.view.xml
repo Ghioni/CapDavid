@@ -6,13 +6,12 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core" 
     controllerName="apptest.controller.CustomerDetail">
-        <Page>
+        <Page navButtonPress=".onNavButtonPress" showNavButton="true">
           <VBox class="sapUiSmallMargin">
             <f:Form id="FormDisplay354"
               editable="false">
               <f:title>
-                <core:Title text="Order Detail" />
-                
+                <core:Title text="Customer Detail" />
               </f:title>
               <f:layout>
                 <f:ResponsiveGridLayout
@@ -31,64 +30,127 @@
                 singleContainerFullSize="false"/>
               </f:layout>
               <f:formContainers>
-                <f:FormContainer title="Order info">
+                <f:FormContainer title="Personal info">
                   <f:formElements>
-                    <f:FormElement label="Order Id">
+                    <f:FormElement label="Name">
                       <f:fields>
-                        <Text text="{orderDetail>/oOrder/Id}" />
+                        <Text text="{path: 'customerDetail>/oCustomer/name'}" />
                       </f:fields>
                     </f:FormElement>
-                    <f:FormElement label="Order Date">
+                    <f:FormElement label="Surname">
                       <f:fields>
-                        <Text text="{path: 'orderDetail>/oOrder/orderDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd-MM-yyyy'}}" />
+                        <Text text="{path: 'customerDetail>/oCustomer/surname'}" />
                       </f:fields>
                     </f:FormElement>
-                    <f:FormElement label="Shipping Date">
+                    <f:FormElement label="Address">
                       <f:fields>
-                        <Text text="{path: 'orderDetail>/oOrder/shippingDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd-MM-yyyy'}}" />
+                        <Text text="{path: 'customerDetail>/oCustomer/address'}" />
                       </f:fields>
                     </f:FormElement>
-                    <f:FormElement label="Product name">
+                      <f:FormElement label="Postal code">
                       <f:fields>
-                        <Text text="{path: 'orderDetail>/oOrder/product'}" />
+                        <Text text="{path: 'customerDetail>/oCustomer/cad'}" />
+                      </f:fields>
+                    </f:FormElement>
+                      <f:FormElement label="City">
+                      <f:fields>
+                        <Text text="{path: 'customerDetail>/oCustomer/city'}" />
+                      </f:fields>
+                    </f:FormElement>
+                      <f:FormElement label="Country">
+                      <f:fields>
+                        <Text text="{path: 'customerDetail>/oCustomer/country'}" />
                       </f:fields>
                     </f:FormElement>
                   </f:formElements>
                 </f:FormContainer>
-                 <f:FormContainer title="Product info">
+                 <f:FormContainer title="Account info">
                   <f:formElements>
-                    <f:FormElement label="Product Name">
-                      <f:fields>
-                        <Text text="{orderDetail>/oOrder/product}" />
-                      </f:fields>
-                    </f:FormElement>
-                    <f:FormElement label="Price">
-                      <f:fields>
-                        <Text text="{orderDetail>/oOrder/price} $" />
-                      </f:fields>
-                    </f:FormElement>
-        
-                  </f:formElements>
-                </f:FormContainer>
-                                 <f:FormContainer title="Customer Info">
-                  <f:formElements>
-                    <f:FormElement label="Customer Contact">
-                      <f:fields>
-                        <Text text="{orderDetail>/oOrder/client_email}" />
-                      </f:fields>
-                    </f:FormElement>
                     <f:FormElement label="Customer ID">
                       <f:fields>
-                        <Text text="{orderDetail>/oOrder/client_Id}" />
+                        <Text text="{customerDetail>/oCustomer/Id}" />
                       </f:fields>
                     </f:FormElement>
-        
+                    <f:FormElement label="Username">
+                      <f:fields>
+                        <Text text="{customerDetail>/oCustomer/username}" />
+                      </f:fields>
+                    </f:FormElement>
+                    <f:FormElement label="Email">
+                      <f:fields>
+                        <Text text="{customerDetail>/oCustomer/email}" />
+                      </f:fields>
+                    </f:FormElement>
+                    <f:FormElement label="Password">
+                      <f:fields>
+                        <Text text="{customerDetail>/oCustomer/password}" />
+                      </f:fields>
+                    </f:FormElement>
+                     <f:FormElement label="Show Orders">
+                      <f:fields>
+                        <Button text="" press="showOrders" icon="sap-icon://cart" width="10%"/>
+                      </f:fields>
+                    </f:FormElement>
                   </f:formElements>
                 </f:FormContainer>
               </f:formContainers>
             </f:Form>
               
           </VBox>
+
+          <ScrollContainer width="100%" height="100%" vertical="true" horizontal="true">
+		<Table 
+        id="idProductsTable" 
+        alternateRowColors="true"
+		    inset="false"
+		    items="{ path: 'Orders>/'}" 
+        visible="false"
+        growing="true"
+        growingThreshold="300"
+        class="sapUiLargeMarginBottom">
+        <columns>
+            <Column>
+				<Button id="cOrderID" text="Order ID" type="Transparent" icon="" press="onSortOrder" />
+            </Column>
+            <Column>
+                <Text text="Order ID" />
+            </Column>           
+            <Column >
+                <Text text="Order Date" />
+            </Column>
+            <Column >
+                <Text text="Shipping Date" />
+            </Column>
+            <Column >
+                <Text text="Product Name" />
+            </Column>
+            <Column >
+                <Text text="Price" />
+            </Column>
+            <Column>
+            
+            </Column>
+            <Column>
+                <Button icon="sap-icon://create" press="onPressAdd" text="Add">              
+                </Button>
+            </Column>
+        </columns>
+        <ColumnListItem vAlign="Middle" type="Active" press="onPressLine" >
+                <cells>
+                   <Text text="{path: 'Orders>Id'}"/>
+                    <Text text="{path: 'Orders>orderDate'}"></Text>
+                    <Text text="{path: 'Orders>shippingDate'}"></Text>
+                    <Text text="{path: 'Orders>product'}"></Text>
+                    <Text text="{path: 'Orders>price'}"/>
+                    <!-- <Button icon="sap-icon://edit" press="onEdit"/>
+                    <Button icon="sap-icon://delete" press="onDelete"/> -->
+                </cells>
+            </ColumnListItem>
+        
+	</Table>
+ 
+
+      </ScrollContainer>
 
         </Page>
 </mvc:View>

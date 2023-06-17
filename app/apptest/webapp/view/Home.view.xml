@@ -9,7 +9,7 @@
         <Table id="2"
             inset="false"
             items="{
-                path: 'myModel>/ordersTable'
+                path: 'myModel>/clientsTable'
             }"
             >
                     <headerToolbar>
@@ -29,19 +29,31 @@
                 </Column>
                 <Column
                     >
-                    <Text text="Order Date" />
+                    <Text text="Name" />
                 </Column>
                 <Column
                     >
-                    <Text text="Order Shipping" />
+                    <Text text="Surname" />
                 </Column>
                 <Column
                     >
-                    <Text text="Client Contact" />
+                    <Text text="Address" />
                 </Column>
                 <Column
                     >
-                    <Text text="Product Name" />
+                    <Text text="Postal Code" />
+                </Column>
+                                <Column
+                    >
+                    <Text text="City" />
+                </Column>
+                                <Column
+                    >
+                    <Text text="Country" />
+                </Column>
+                                <Column
+                    >
+                    <Text text="Email" />
                 </Column>
                             <Column width="4rem"
                     >
@@ -56,21 +68,19 @@
                         <Text
                             text="{path: 'myModel>Id'}" />
                         <Text
-                            text="{path           : 'myModel>orderDate',
-                                'type'         : 'sap.ui.model.type.Date',
-                                'formatOptions': {
-                                'pattern'      : 'dd/MM/y'
-                                    }}" />
-                                    <Text
-                            text="{path           : 'myModel>shippingDate',
-                                'type'         : 'sap.ui.model.type.Date',
-                                'formatOptions': {
-                                'pattern'      : 'dd/MM/y'
-                                    }}" />
-                            <Text
-                            text="{path: 'myModel>client_email'}" />
-                            <Text
-                            text="{path: 'myModel>product'}" />
+                            text="{path: 'myModel>name'}" />
+                        <Text
+                            text="{path: 'myModel>surname'}" />
+                        <Text
+                            text="{path: 'myModel>address'}" />
+                        <Text
+                            text="{path: 'myModel>cad'}" />
+                        <Text
+                            text="{path: 'myModel>city'}" />
+                        <Text
+                            text="{path: 'myModel>country'}" />
+                        <Text
+                            text="{path: 'myModel>email'}" />
                             
                         <Button press="onPressGetObject" icon="sap-icon://edit"/>
                         <Button press="onPressDelete" icon="sap-icon://delete"/>
