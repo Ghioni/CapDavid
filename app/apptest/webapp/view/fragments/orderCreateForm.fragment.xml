@@ -59,10 +59,7 @@
             <Label text="Client id" />
             <Input value="{orderFormModel>/client_id}" />
 
-            <Label text="Client email" />
-            <Input value="{orderFormModel>/client_email}" />
-
-            <Button text="Add" press="onPressEdit"/>
+            <Button text="Add" press="onPressAdd"/>
             <Button text="Close" press="closeOnPress"/>
         </f:content>
     </f:SimpleForm>

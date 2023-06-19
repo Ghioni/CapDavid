@@ -122,6 +122,13 @@
           ]
         },
         {
+          "name": "Orders",
+          "pattern": "Orders",
+          "target": [
+            "Orders"
+          ]
+        },
+        {
           "name": "CustomerDetail",
           "pattern": "CustomerDetail/{Id}/{email}",
           "target": [
@@ -143,6 +150,13 @@
           "clearControlAggregation": false,
           "viewId": "OrderDetail",
           "viewName": "OrderDetail"
+        },
+        "Orders": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Orders",
+          "viewName": "Orders"
         },
         "CustomerDetail": {
           "viewType": "XML",

@@ -26,7 +26,7 @@
 
             <Label text="Shipping Date" />
             <DatePicker
-                    id="DP2"
+                    
                     placeholder="Enter Date"
                     change="handleChange"
                     class="sapUiSmallMarginBottom"

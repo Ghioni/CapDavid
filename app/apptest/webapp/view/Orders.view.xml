@@ -1,0 +1,94 @@
+<mvc:View controllerName="apptest.controller.Orders"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+    displayBlock="true">
+    <Page id="page" title="Orders">
+    <ScrollContainer width="100%" height="100%" vertical="true" horizontal="true">
+        <Table id="2"
+            inset="false"
+            items="{
+                path: 'myModel>/ordersTable'
+            }"
+            >
+                    <headerToolbar>
+                <OverflowToolbar>
+                    <content>
+                        <Title  level="H2"/>
+                        <ToolbarSpacer />
+					<Label text="Create:" />
+					<Button text="add" press="onPressCreateDialog" icon="sap-icon://create-form"/>
+                    </content>
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column 
+                    >
+                    <Text text="Order ID" />
+                </Column>
+                <Column 
+                    >
+                    <Text text="Order Date" />
+                </Column>
+                <Column
+                    >
+                    <Text text="Shipping Date" />
+                </Column>
+                <Column
+                    >
+                    <Text text="Product Name" />
+                </Column>
+                <Column
+                    >
+                    <Text text="price" />
+                </Column>
+                <Column
+                    >
+                    <Text text="Client ID" />
+                </Column>
+                <Column width="4rem"
+                    >
+                </Column>
+                <Column width="4rem"
+                    >
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle" type="Active" press="onPressLine">
+                    <cells>
+                        <Text
+                            text="{path: 'myModel>Id'}" />
+                        <Text
+                            text="{
+						            'path': 'myModel>orderDate',
+						            'type': 'sap.ui.model.type.Date',
+						            'formatOptions': {
+							        'pattern': 'dd/MM/y'
+						}
+					}" />
+                        <Text
+                            text="{
+						            'path': 'myModel>shippingDate',
+						            'type': 'sap.ui.model.type.Date',
+						            'formatOptions': {
+							        'pattern': 'dd/MM/y'
+						}
+					}" />
+                        <Text
+                            text="{path: 'myModel>product'}" />
+                        <Text
+                            text="{path: 'myModel>price'} $" />
+                        <Text
+                            text="{path: 'myModel>client_Id'}" />
+                            
+                        <Button press="onPressGetObject" icon="sap-icon://edit"/>
+                        <Button press="onPressDelete" icon="sap-icon://delete"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </ScrollContainer>
+
+    </Page>
+</mvc:View>

@@ -19,6 +19,8 @@
                         <ToolbarSpacer />
                         <Label text="Create:" />
                         <Button text="add" press="onPressCreateDialog" icon="sap-icon://create-form"/>
+                        <Label text="Navigate to Orders:"/>
+                        <Button press="navigateToOrder" icon="sap-icon://cart"/>
                     </content>
                 </OverflowToolbar>
             </headerToolbar>

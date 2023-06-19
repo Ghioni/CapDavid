@@ -16,15 +16,15 @@ sap.ui.define([
         "use strict";
 
 
-        return Controller.extend("apptest.controller.Home", {
+        return Controller.extend("apptest.controller.Orders", {
           getRouter: function () {
             return UIComponent.getRouterFor(this);
           },
             onInit: async function () {
 
                 let oModel = new JSONModel({});
-                const aDataOrders = await this._getHanaData("/clientsTable");
-                oModel.setProperty("/clientsTable", aDataOrders)
+                const aDataOrders = await this._getHanaData("/ordersTable");
+                oModel.setProperty("/ordersTable", aDataOrders)
                 this.getView().setModel(oModel, "myModel");
             },
 
@@ -46,7 +46,7 @@ sap.ui.define([
                 const oLine = oEvent.getSource().getBindingContext("myModel").getObject();
                 const sKey = oLine.Id;
                 console.log(sKey);
-                const sPath = `/clientsTable(${sKey})`;
+                const sPath = `/ordersTable(${sKey})`;
         
                 MessageBox.warning("Are you sure you want to delete?", {
                   actions: [MessageBox.Action.OK, MessageBox.Action.CLOSE],
@@ -57,8 +57,8 @@ sap.ui.define([
                           MessageToast.show("Deletion was successful")
                           // Refresh of the table
                           let oModel = new JSONModel({});
-                          const aDataOrders = await this._getHanaData("/clientsTable");
-                          oModel.setProperty("/clientsTable", aDataOrders)
+                          const aDataOrders = await this._getHanaData("/ordersTable");
+                          oModel.setProperty("/ordersTable", aDataOrders)
                           this.getView().setModel(oModel, "myModel");
                         },
                         error: async (e) => {
@@ -73,7 +73,7 @@ sap.ui.define([
               onPressCreateDialog: function () {
                 if (!this.pDialog) {
                   this.pDialog = this.loadFragment({
-                    name: "apptest.view.fragments.clientCreate",
+                    name: "apptest.view.fragments.orderCreateForm",
                   });
                 }
                 this.pDialog.then(function (oDialog) {
@@ -85,28 +85,25 @@ sap.ui.define([
               },
               onPressAdd: function(){
                 const modelloDati = this.getOwnerComponent().getModel();
-                const oNew = this.getView().getModel("clientFormModel").getData();
-                // Adjust timezone of date picker
-                // const orderDate = oNew.orderDate;
-                // const shippingDate = oNew.shippingDate;
-                // orderDate.setHours(3);
-                // shippingDate.setHours(3);
+                const oNew = this.getView().getModel("orderFormModel").getData();
+                //Adjust timezone of date picker
+                const orderDate = oNew.orderDate;
+                const shippingDate = oNew.shippingDate;
+                orderDate.setHours(3);
+                shippingDate.setHours(3);
 
-                modelloDati.create("/clientsTable", {Id       : parseInt(oNew.Id),
-                                                    name      : oNew.name,
-                                                    surname   : oNew.surname,
-                                                    address   : oNew.address,
-                                                    cad       : parseInt(oNew.cad),
-                                                    city      : oNew.city,
-                                                    country   : oNew.country,
-                                                    email     : oNew.email,
-                                                    password  : oNew.password}, {
+                modelloDati.create("/ordersTable", {Id       : parseInt(oNew.Id),
+                                                    orderDate      : orderDate,
+                                                    shippingDate   : shippingDate,
+                                                    product   : oNew.product,
+                                                    price       : parseInt(oNew.price),
+                                                    client_Id      : parseInt(oNew.client_id)}, {
                   success: async (oNew, response) => {
                       MessageToast.show("New entry created")
                       // Refresh of the table
                       let oModel = new JSONModel({});
-                      const aDataOrders = await this._getHanaData("/clientsTable");
-                      oModel.setProperty("/clientsTable", aDataOrders)
+                      const aDataOrders = await this._getHanaData("/ordersTable");
+                      oModel.setProperty("/ordersTable", aDataOrders)
                       this.getView().setModel(oModel, "myModel");
                       // Closing of the dialog
                       this.byId("createDialog").close();
@@ -127,7 +124,7 @@ sap.ui.define([
               onPressEditDialog: function(){
                 if (!this.pDialog2) {
                   this.pDialog2 = this.loadFragment({
-                    name: "apptest.view.fragments.clientUpdate",
+                    name: "apptest.view.fragments.orderUpdateForm",
                   });
                 }
                 this.pDialog2.then(function (oDialog2) {
@@ -140,21 +137,18 @@ sap.ui.define([
                 const oForm = this.getView().getModel("editForm").getData();
                 const sKey = oForm.Id;
                 const sKeyE = oForm.email;
-                modelloDati.update("/clientsTable(" + sKey + ")", { Id        : parseInt(oForm.Id),
-                                                                    name      : oForm.name,
-                                                                    surname   : oForm.surname,
-                                                                    address   : oForm.address,
-                                                                    cad       : parseInt(oForm.cad),
-                                                                    city      : oForm.city,
-                                                                    country   : oForm.country,
-                                                                    email     : oForm.email,
-                                                                    password  : oForm.password}, {
+                modelloDati.update("/ordersTable(" + sKey + ")", {  Id       : parseInt(oNew.Id),
+                                                                    orderDate       : orderDate,
+                                                                    shippingDate    : shippingDate,
+                                                                    product         : oNew.product,
+                                                                    price           : parseInt(oNew.price),
+                                                                    client_Id       : parseInt(oNew.cad)}, {
                   success: async (oForm, response) => {
                       MessageToast.show("Update Success!")
                       // Refresh of the table
                       let oModel = new JSONModel({});
-                      const aDataOrders = await this._getHanaData("/clientsTable");
-                      oModel.setProperty("/clientsTable", aDataOrders)
+                      const aDataOrders = await this._getHanaData("/ordersTable");
+                      oModel.setProperty("/ordersTable", aDataOrders)
                       this.getView().setModel(oModel, "myModel");
                       // Closing of the dialog
                       this.byId("editDialog").close();
@@ -179,7 +173,7 @@ sap.ui.define([
                     actions: [MessageBox.Action.OK, MessageBox.Action.CLOSE],
                     onClose: function (sAction) {
                         if(sAction == 'OK'){
-                            self.getOwnerComponent().getRouter().navTo("CustomerDetail",{
+                            self.getOwnerComponent().getRouter().navTo("OrderDetail",{
                                 Id: oId,
                                 email: oEmail
                             })
